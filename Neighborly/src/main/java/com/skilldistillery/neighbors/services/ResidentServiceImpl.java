@@ -45,6 +45,10 @@ public class ResidentServiceImpl implements ResidentService{
 
 	@Override
 	public Resident update(int residentId, Resident updatingResident) {
+		if (residentRepo.existsById(residentId)) {
+			updatingResident.setId(residentId);
+			return residentRepo.save(updatingResident);
+		}
 		return null;
 	}
 
