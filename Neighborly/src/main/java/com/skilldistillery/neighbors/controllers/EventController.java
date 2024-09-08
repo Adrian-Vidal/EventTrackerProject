@@ -29,7 +29,6 @@ public class EventController {
 		return eventService.getAllEvents();
 	}
 
-	
 	@GetMapping("events/{eventId}")
     private ResponseEntity<Event> getEventById(@PathVariable("eventId") int eventId) {
         Event event = eventService.showEvent(eventId);
@@ -64,7 +63,7 @@ public class EventController {
     }
 
     @DeleteMapping("events/{eventId}")
-    private ResponseEntity<Void> deleteEvent(@PathVariable("id") int eventId) {
+    private ResponseEntity<Void> deleteEvent(@PathVariable("eventId") int eventId) {
         boolean deleted = eventService.delete(eventId);
         if (deleted) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
