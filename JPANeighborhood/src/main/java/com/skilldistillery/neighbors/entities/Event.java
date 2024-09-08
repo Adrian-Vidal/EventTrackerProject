@@ -11,6 +11,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 
 @Entity
 public class Event {
@@ -19,6 +21,7 @@ public class Event {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	private String name;
+	private String description;
 	@CreationTimestamp
 	@Column(name = "create_date")
 	private LocalDateTime createDate;
@@ -29,6 +32,10 @@ public class Event {
 	private String imageUrl;
 	private boolean enabled;
 //	change to Boolean after changing enabled to not nullable in DB
+	
+	@ManyToOne
+	@JoinColumn(name = "neighborhood_id")
+	private Neighborhood neighborhood;
 	
 	public Event() {
 	}
@@ -51,6 +58,16 @@ public class Event {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+
+	public String getDescription() {
+		return description;
+	}
+
+
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 
@@ -94,6 +111,16 @@ public class Event {
 	}
 
 
+	public Neighborhood getNeighborhood() {
+		return neighborhood;
+	}
+
+
+	public void setNeighborhood(Neighborhood neighborhood) {
+		this.neighborhood = neighborhood;
+	}
+
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
@@ -113,12 +140,5 @@ public class Event {
 	}
 
 
-	@Override
-	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("Event [id=").append(id).append(", name=").append(name).append(", createDate=")
-				.append(createDate).append(", lastUpdate=").append(lastUpdate).append(", imageUrl=").append(imageUrl)
-				.append(", enabled=").append(enabled).append("]");
-		return builder.toString();
-	}
+	
 }
