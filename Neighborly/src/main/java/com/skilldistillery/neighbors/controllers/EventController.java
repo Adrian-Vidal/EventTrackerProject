@@ -46,17 +46,15 @@ public class EventController {
             Event createdEvent = eventService.create(newEvent);
             return new ResponseEntity<>(createdEvent, HttpStatus.CREATED);
         } catch (IllegalArgumentException e) {
-            // Handle specific exceptions and provide a meaningful error message
             return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
         } catch (Exception e) {
-            // Handle other unexpected exceptions
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
     
 
     @PutMapping("events/{eventId}")
-    private ResponseEntity<Event> updateEvent(@PathVariable("id") int eventId, @RequestBody Event updatingEvent) {
+    private ResponseEntity<Event> updateEvent(@PathVariable("eventId") int eventId, @RequestBody Event updatingEvent) {
         Event updatedEvent = eventService.update(eventId, updatingEvent);
         if (updatedEvent != null) {
             return new ResponseEntity<>(updatedEvent, HttpStatus.OK);

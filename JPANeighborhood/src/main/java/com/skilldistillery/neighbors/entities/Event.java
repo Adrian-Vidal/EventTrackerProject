@@ -31,7 +31,6 @@ public class Event {
 	@Column(name = "image_url")
 	private String imageUrl;
 	private boolean enabled;
-//	change to Boolean after changing enabled to not nullable in DB
 	
 	@ManyToOne
 	@JoinColumn(name = "neighborhood_id")
