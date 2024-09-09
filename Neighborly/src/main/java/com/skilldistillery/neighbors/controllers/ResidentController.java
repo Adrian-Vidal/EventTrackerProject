@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -55,6 +56,16 @@ public class ResidentController {
         Resident updatedResident = residentService.update(residentId, updatingResident);
         if (updatedResident != null) {
             return new ResponseEntity<>(updatedResident, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+	
+	@DeleteMapping("residents/{residentId}")
+    private ResponseEntity<Void> deleteResident(@PathVariable("residentId") int residentId) {
+        boolean deleted = residentService.delete(residentId);
+        if (deleted) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }

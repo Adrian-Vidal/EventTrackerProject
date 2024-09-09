@@ -54,7 +54,11 @@ public class ResidentServiceImpl implements ResidentService{
 
 	@Override
 	public boolean delete(int residentId) {
-		return false;
+	    if (residentRepo.existsById(residentId)) {
+	        residentRepo.deleteById(residentId);
+	        return true;
+	    }
+	    return false;
 	}
 
 }
