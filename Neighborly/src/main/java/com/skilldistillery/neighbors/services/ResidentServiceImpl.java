@@ -65,5 +65,4 @@ public class ResidentServiceImpl implements ResidentService{
 	    public List<Resident> findByFirstName(String firstName) {
 	        return residentRepo.findByFirstName(firstName);
 	    }
-
 }
