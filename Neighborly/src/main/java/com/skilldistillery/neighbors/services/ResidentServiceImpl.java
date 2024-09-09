@@ -60,5 +60,10 @@ public class ResidentServiceImpl implements ResidentService{
 	    }
 	    return false;
 	}
+	
+	 @Override
+	    public List<Resident> findByFirstName(String firstName) {
+	        return residentRepo.findByFirstName(firstName);
+	    }
 
 }

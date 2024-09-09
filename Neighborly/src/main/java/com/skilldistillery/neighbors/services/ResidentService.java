@@ -11,6 +11,7 @@ public interface ResidentService {
 	Resident create(Resident newResident);
 	Resident update(int residentId, Resident updatingResident);
 	boolean delete(int residentId);
+	List<Resident> findByFirstName(String firstName);
 	
 
 }
