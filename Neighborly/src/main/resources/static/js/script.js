@@ -47,12 +47,17 @@ function displayEventsList(eventList) {
 	}
 
 	tbody.innerHTML = '';
+	
 	eventList.forEach(event => {
 		let row = document.createElement('tr');
 
 		let nameCell = document.createElement('td');
 		nameCell.textContent = event.name;
 		row.appendChild(nameCell);
+		nameCell.style.cursor = 'pointer';
+		nameCell.addEventListener('click', function(){
+			displayEventDetails(event);
+		});
 
 		let lastUpdateCell = document.createElement('td');
 		lastUpdateCell.textContent = event.lastUpdate;
