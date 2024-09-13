@@ -5,8 +5,15 @@ window.addEventListener('load', function() {
 	init();
 });
 
+//======================================================//
+
 function init() {
 	loadAllEvents();
+	document.addEventListener('load', function(event) {
+		event.preventDefault();
+		loadAllEvents();
+	});
+
 
 	//TODO - event listeners, etc.
 }
@@ -23,13 +30,41 @@ function loadAllEvents() {
 			}
 			else {
 				//FIXME
+				console.error('Error loading events:', xhr.status, xhr.statusText);
 			}
 		}
 	};
 	xhr.send();
 }
 
+//======================================================//
+
 function displayEventsList(eventList) {
 	let tbody = document.getElementById('eventListBody');
-	//FIXME
+	if (!tbody) {
+		console.error('No upcoming events found');
+		return;
+	}
+
+	tbody.innerHTML = '';
+	eventList.forEach(event => {
+		let row = document.createElement('tr');
+
+		let nameCell = document.createElement('td');
+		nameCell.textContent = event.name;
+		row.appendChild(nameCell);
+
+		let lastUpdateCell = document.createElement('td');
+		lastUpdateCell.textContent = event.lastUpdate;
+		row.appendChild(lastUpdateCell);		
+
+		tbody.appendChild(row);
+		//FIXME
+	});
+
 }
+
+
+
+
+

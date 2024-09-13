@@ -32,6 +32,12 @@ EventTrackerProject is a full-stack application designed to manage events and re
 | DELETE    | `/api/residents/10`      |              | | 204, 404, 400 |
 | GET       | `/api/residents/search?firstName=Peyton`      |              | Representation of _resident_ `Peyton` | 200, 204 |
 
+## Database Schema
+//Picture of ERD diagram
+
+## HTML/Javascript Front End using XHR/AJAX
+
+
 ## Technologies Used
 
 * Github
