@@ -5,7 +5,7 @@ window.addEventListener('load', function() {
 	init();
 });
 
-//======================================================//
+//==================================================================================//
 
 function init() {
 	loadAllEvents();
@@ -37,7 +37,7 @@ function loadAllEvents() {
 	xhr.send();
 }
 
-//======================================================//
+//==================================================================================//
 
 function displayEventsList(eventList) {
 	let tbody = document.getElementById('eventListBody');
@@ -52,9 +52,11 @@ function displayEventsList(eventList) {
 		let row = document.createElement('tr');
 
 		let nameCell = document.createElement('td');
-		nameCell.textContent = event.name;
+		let nameSpan = document.createElement('span');
+		nameSpan.className = 'event-name';
+		nameSpan.textContent = event.name;
+		nameCell.appendChild(nameSpan);
 		row.appendChild(nameCell);
-		nameCell.style.cursor = 'pointer';
 		nameCell.addEventListener('click', function(){
 			displayEventDetails(event);
 		});
@@ -69,7 +71,25 @@ function displayEventsList(eventList) {
 
 }
 
+//==================================================================================//
 
+function displayEventDetails(event) {
+    let detailsDiv = document.getElementById('eventDetailsDiv');
+    if (!detailsDiv) {
+        console.error('Event details container not found');
+        return;
+    }
+
+    detailsDiv.innerHTML = '';
+
+    let detailsHtml = 
+        `<h2><span class="event-name">${event.name}</span></h2>
+        ${event.imageUrl ? `<img src="${event.imageUrl}" class="event-image" />` : ''}
+        <p><strong>Description:</strong> ${event.description || 'No description available.'}</p>`;
+
+   
+    detailsDiv.innerHTML = detailsHtml;
+}
 
 
 

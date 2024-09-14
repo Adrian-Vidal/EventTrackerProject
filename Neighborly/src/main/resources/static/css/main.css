@@ -1,4 +1,30 @@
-
-body{
+body {
 	background-color: lightblue;
+	text-align: center;
+}
+
+.events-table {
+    border-collapse: collapse;
+    width: 100%; 
+    background-color: white;
+}
+
+.events-table th, .events-table td {
+    border: 2px solid black; 
+    padding: 8px; 
+}
+
+.event-name {
+	transition: color 0.3s ease; 
+	cursor: pointer; 
+}
+
+.event-name:hover {
+	color: #DA70D6; 
+	text-decoration: underline; 
+}
+
+.event-image {
+	max-width: 60%;
+	height: auto;
 }
