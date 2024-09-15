@@ -17,7 +17,7 @@
 
 	<!--=========== LIST ALL EVENTS ===========-->
 	
-	
+		<div class="table-container">
 		<table class="events-table">
 			<thead>
 				<tr>
@@ -27,16 +27,33 @@
 			</thead>
 			<tbody id="eventListBody"></tbody>
 		</table>
-	
+		</div>
 	
 	<!--=========== VIEW SINGLE EVENT ===========-->
   
+   <form id="newEventForm">
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name" required><br><br>
+    
+    <label for="description">Description:</label>
+    <input type="text" id="description" name="description"><br><br>
+    
+    <label for="createDate">Create Date:</label>
+    <input type="text" id="createDate" name="createDate"><br><br>
+    
+    <label for="lastUpdate">Last Update:</label>
+    <input type="text" id="lastUpdate" name="lastUpdate"><br><br>
+    
+    <label for="imageUrl">Image URL:</label>
+    <input type="text" id="imageUrl" name="imageUrl"><br><br>
+    
+    <button type="submit" class="btn btn-primary">Add Event</button>
+</form>
+
+
 
 
 <div id="eventDetailsDiv"></div>
-
-<div id="addNewEventDiv"></div>
-
 
 </main>
 </body>

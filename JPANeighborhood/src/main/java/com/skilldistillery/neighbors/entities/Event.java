@@ -30,11 +30,12 @@ public class Event {
 	private LocalDateTime lastUpdate;
 	@Column(name = "image_url")
 	private String imageUrl;
-	private boolean enabled;
 	
 	@ManyToOne
 	@JoinColumn(name = "neighborhood_id")
 	private Neighborhood neighborhood;
+	
+	private boolean enabled;
 	
 	public Event() {
 	}
@@ -100,15 +101,6 @@ public class Event {
 	}
 
 
-	public boolean isEnabled() {
-		return enabled;
-	}
-
-
-	public void setEnabled(boolean enabled) {
-		this.enabled = enabled;
-	}
-
 
 	public Neighborhood getNeighborhood() {
 		return neighborhood;
@@ -117,6 +109,16 @@ public class Event {
 
 	public void setNeighborhood(Neighborhood neighborhood) {
 		this.neighborhood = neighborhood;
+	}
+
+
+	public boolean getEnabled() {
+		return enabled;
+	}
+
+
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
 	}
 
 
@@ -137,6 +139,20 @@ public class Event {
 		Event other = (Event) obj;
 		return id == other.id;
 	}
+
+
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("Event [id=").append(id).append(", name=").append(name).append(", description=")
+				.append(description).append(", createDate=").append(createDate).append(", lastUpdate=")
+				.append(lastUpdate).append(", imageUrl=").append(imageUrl).append(", neighborhood=")
+				.append(neighborhood).append(", enabled=").append(enabled).append("]");
+		return builder.toString();
+	}
+
+
+	
 
 
 	

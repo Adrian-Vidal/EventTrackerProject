@@ -15,22 +15,41 @@ body {
     font-weight: bold;
 }
 
-.events-table {
-	color:black;
-    border-collapse: collapse;
-    width: 100%; 
-    background-color: white;
-    opacity: 0.65;
+
+/* ============================ EVENTS-TABLE ============================ */
+
+.table-container {
+    display: flex;
+    justify-content: center;
+    max-height: 275px;
+    overflow-y: scroll;
+    margin-bottom: 20px;
 }
 
-.events-table th {
-	size: 200px;
+.events-table {
+    width: 60%;
+    border-collapse: collapse;
+    background-color: rgba(255, 255, 255, 0.4);
+    color:black;
 }
 
 .events-table th, .events-table td {
-    border: 2px solid black; 
+    border: 2px solid black;
     padding: 8px;
+    text-align: center;
 }
+
+.events-table th {
+	font-size: 30px;
+	
+}
+
+.table-container::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+/* ============================ EVENT-NAME ============================ */
+
 
 .event-name {
     transition: color 0.3s ease; 
@@ -42,8 +61,29 @@ body {
     text-decoration: underline; 
 }
 
+/* ============================ EVENT-IMAGE ============================ */
+
 .event-image {
     width: 60%;
     height: auto;
     align-content: center;
+}
+
+/* ============================ EVENT-DESCRIPTION ============================ */
+
+.event-description {
+	background-color: black;
+	font-size: 20px;
+}
+
+
+/* ============================ BTN-PRIMARY ============================ */
+.btn-primary {
+    margin-bottom: 20px;
+}
+
+/* ============================ MODAL-CONTENT ============================ */
+
+.modal-content {
+    border-radius: 0.5rem; /* Rounded corners for the modal */
 }

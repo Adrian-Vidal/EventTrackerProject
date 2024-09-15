@@ -5,6 +5,8 @@ window.addEventListener('load', function() {
     init();
 });
 
+//================================================================================//
+
 function init() {
     loadAllEvents();
 }
@@ -25,6 +27,8 @@ function loadAllEvents() {
     };
     xhr.send();
 }
+
+//================================================================================//
 
 function displayEventsList(eventList) {
     let tbody = document.getElementById('eventListBody');
@@ -56,6 +60,8 @@ function displayEventsList(eventList) {
     });
 }
 
+//================================================================================//
+
 function displayEventDetails(event) {
     let detailsDiv = document.getElementById('eventDetailsDiv');
     if (!detailsDiv) {
@@ -68,7 +74,69 @@ function displayEventDetails(event) {
     let detailsHtml = 
         `<h2><span class="event-name">${event.name}</span></h2>
         ${event.imageUrl ? `<img src="${event.imageUrl}" class="event-image" />` : ''}
-        <p><strong>Description:</strong> ${event.description || 'No description available.'}</p>`;
+        <p><span class="event-description"> ${event.description || 'No description available.'}</span></p>`;
 
     detailsDiv.innerHTML = detailsHtml;
+}
+
+//================================================================================//
+
+window.addEventListener('DOMContentLoaded', function() {
+    const form = document.getElementById('newEventForm');
+
+    if (form) {
+        form.addEventListener('submit', function(e) {
+            e.preventDefault(); // Prevent the default form submission
+            
+            console.log('Adding event');
+            
+            const newEvent = {
+                name: form.name.value,
+                description: form.description.value,
+				createDate: form.createDate.value,
+				lastUpdate: form.lastUpdate.value,
+                imageUrl: form.imageUrl.value,
+            };
+
+            console.log('New Event Object:', newEvent); // Log the event object
+
+            addEvent(newEvent);
+        });
+    } else {
+        console.error('Form element not found');
+    }
+
+    // Other event listeners for search and add links
+    // ...
+});
+
+function addEvent(newEvent) {
+    let xhr = new XMLHttpRequest();
+    xhr.open('POST', 'api/events', true);
+    xhr.setRequestHeader("Content-type", "application/json");
+
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState === XMLHttpRequest.DONE) {
+            if (xhr.status === 200 || xhr.status === 201) {
+                console.log('Event added successfully:', xhr.responseText);
+                displayEvent(JSON.parse(xhr.responseText)); // Ensure this function is defined
+            } else {
+                console.error('Error creating event:', xhr.status, xhr.responseText);
+                displayError("Error creating event: " + xhr.status); // Ensure this function is defined
+            }
+        }
+    };
+
+    let eventJson = JSON.stringify(newEvent);
+    xhr.send(eventJson);
+}
+
+function displayEvent(event) {
+    // Implement this function to update the UI or handle the newly added event
+    console.log('Displaying event:', event);
+}
+
+function displayError(error) {
+    // Implement this function to show errors to the user
+    console.error('Error:', error);
 }
