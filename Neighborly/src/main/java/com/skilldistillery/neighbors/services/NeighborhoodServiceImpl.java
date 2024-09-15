@@ -20,8 +20,8 @@ public class NeighborhoodServiceImpl implements NeighborhoodService{
 	}
 
 	@Override
-	public Neighborhood findById(int neighborhoodId) {
-		return neighborhoodRepo.findById(neighborhoodId).orElse(null);
+	public Neighborhood findById(int id) {
+		return neighborhoodRepo.findById(id).orElse(null);
 	}
 
 }

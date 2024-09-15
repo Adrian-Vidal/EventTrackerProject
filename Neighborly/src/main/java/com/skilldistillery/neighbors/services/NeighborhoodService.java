@@ -7,6 +7,6 @@ import com.skilldistillery.neighbors.entities.Neighborhood;
 public interface NeighborhoodService {
 	
 	List<Neighborhood> getAllNeighborhoods();
-	Neighborhood findById(int neighborhoodId);
+	Neighborhood findById(int id);
 
 }

@@ -15,7 +15,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.skilldistillery.neighbors.entities.Event;
+import com.skilldistillery.neighbors.entities.Neighborhood;
 import com.skilldistillery.neighbors.services.EventService;
+import com.skilldistillery.neighbors.services.NeighborhoodService;
 
 @RestController
 @RequestMapping("api")
@@ -23,6 +25,9 @@ public class EventController {
 	
 	@Autowired
 	private EventService eventService;
+	
+	@Autowired
+    private NeighborhoodService neighborhoodService;
 	
 	@GetMapping("events")
 	private List<Event> getEventList(){
@@ -39,17 +44,27 @@ public class EventController {
         }
     }
 
-    @PostMapping({"events","events/"})
-    private ResponseEntity<Event> createEvent(@RequestBody Event newEvent) {
-        try {
-            Event createdEvent = eventService.create(newEvent);
-            return new ResponseEntity<>(createdEvent, HttpStatus.CREATED);
-        } catch (IllegalArgumentException e) {
-            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
-        } catch (Exception e) {
-            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
+	    @PostMapping({"events","events"})
+	    private ResponseEntity<Event> createEvent(@RequestBody Event newEvent) {
+	    	  try {
+	    	        if (newEvent.getNeighborhood() != null) {
+	    	            Neighborhood neighborhood = neighborhoodService.findById(newEvent.getNeighborhood().getId());
+	    	            if (neighborhood == null) {
+	    	                return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+	    	            }
+	    	            newEvent.setNeighborhood(neighborhood);
+	    	        } else {
+	    	            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+	    	        }
+
+	    	        Event createdEvent = eventService.create(newEvent);
+	    	        return new ResponseEntity<>(createdEvent, HttpStatus.CREATED);
+	    	    } catch (IllegalArgumentException e) {
+	    	        return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+	    	    } catch (Exception e) {
+	    	        return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+	    	    }
+	    	}
     
 
     @PutMapping("events/{eventId}")

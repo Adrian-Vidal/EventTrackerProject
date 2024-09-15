@@ -82,11 +82,11 @@ function displayEventDetails(event) {
 //================================================================================//
 
 window.addEventListener('DOMContentLoaded', function() {
-    const form = document.getElementById('newEventForm');
+    let form = document.getElementById('newEventForm');
 
     if (form) {
         form.addEventListener('submit', function(e) {
-            e.preventDefault(); // Prevent the default form submission
+            e.preventDefault();
             
             console.log('Adding event');
             
@@ -96,9 +96,13 @@ window.addEventListener('DOMContentLoaded', function() {
 				createDate: form.createDate.value,
 				lastUpdate: form.lastUpdate.value,
                 imageUrl: form.imageUrl.value,
+				enabled: form.enabled.checked,
+				neighborhood: {
+				            id: parseInt(form.neighborhoodId.value) 
+				        }
             };
 
-            console.log('New Event Object:', newEvent); // Log the event object
+            console.log('New Event Object:', newEvent); 
 
             addEvent(newEvent);
         });
@@ -106,8 +110,7 @@ window.addEventListener('DOMContentLoaded', function() {
         console.error('Form element not found');
     }
 
-    // Other event listeners for search and add links
-    // ...
+ 
 });
 
 function addEvent(newEvent) {
@@ -119,10 +122,10 @@ function addEvent(newEvent) {
         if (xhr.readyState === XMLHttpRequest.DONE) {
             if (xhr.status === 200 || xhr.status === 201) {
                 console.log('Event added successfully:', xhr.responseText);
-                displayEvent(JSON.parse(xhr.responseText)); // Ensure this function is defined
+                displayEvent(JSON.parse(xhr.responseText));
             } else {
                 console.error('Error creating event:', xhr.status, xhr.responseText);
-                displayError("Error creating event: " + xhr.status); // Ensure this function is defined
+                displayError("Error creating event: " + xhr.status);
             }
         }
     };
@@ -132,11 +135,9 @@ function addEvent(newEvent) {
 }
 
 function displayEvent(event) {
-    // Implement this function to update the UI or handle the newly added event
     console.log('Displaying event:', event);
 }
 
 function displayError(error) {
-    // Implement this function to show errors to the user
     console.error('Error:', error);
 }
