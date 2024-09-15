@@ -71,13 +71,17 @@ function displayEventDetails(event) {
 
     detailsDiv.innerHTML = '';
 
-    let detailsHtml = 
-        `<h2><span class="event-name">${event.name}</span></h2>
-        ${event.imageUrl ? `<img src="${event.imageUrl}" class="event-image" />` : ''}
-        <p><span class="event-description"> ${event.description || 'No description available.'}</span></p>`;
+	let detailsHtml = `
+	        <h2><span class="event-name">${event.name}</span></h2>
+	        <p><span class="event-description">${event.description || 'No description available.'}</span></p>
+	        ${event.imageUrl ? `<img src="${event.imageUrl}" class="event-image" />` : ''}
+	        <div class="button-group">
+	            <button class="update-btn" onclick="updateEvent(${event.id})">Update</button>
+	            <button class="delete-btn" onclick="deleteEvent(${event.id})">Delete</button>
+	        </div>`;
 
-    detailsDiv.innerHTML = detailsHtml;
-}
+	    detailsDiv.innerHTML = detailsHtml;
+	}
 
 //================================================================================//
 
@@ -140,4 +144,51 @@ function displayEvent(event) {
 
 function displayError(error) {
     console.error('Error:', error);
+}
+
+
+//================================================================================//
+
+
+function updateEvent(eventId) {
+    alert(`Update event with ID: ${eventId}`);
+}
+
+
+//================================================================================//
+
+
+function deleteEvent(eventId) {
+    let xhr = new XMLHttpRequest();
+    xhr.open('GET', `api/events/${eventId}`, true);
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState === XMLHttpRequest.DONE) {
+            if (xhr.status === 200) {
+                let event = JSON.parse(xhr.responseText);
+                let eventName = event.name; 
+
+                if (confirm(`Are you sure you want to delete the event: ${eventName}?`)) {
+                    
+                    let deleteXhr = new XMLHttpRequest();
+                    deleteXhr.open('DELETE', `api/events/${eventId}`, true);
+                    deleteXhr.onreadystatechange = function() {
+                        if (deleteXhr.readyState === XMLHttpRequest.DONE) {
+                            if (deleteXhr.status === 200 || deleteXhr.status === 204) {
+                                console.log('Event deleted successfully');
+                                loadAllEvents(); 
+                            } else {
+                                console.error('Error deleting event:', deleteXhr.status, deleteXhr.responseText);
+                                displayError("Error deleting event: " + deleteXhr.status);
+                            }
+                        }
+                    };
+                    deleteXhr.send();
+                }
+            } else {
+                console.error('Error fetching event details:', xhr.status, xhr.responseText);
+                displayError("Error fetching event details: " + xhr.status);
+            }
+        }
+    };
+    xhr.send();
 }
