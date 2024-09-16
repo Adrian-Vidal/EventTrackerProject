@@ -214,15 +214,14 @@ function deleteEvent(eventId) {
 
 function loadEnabledEventsCount() {
     let xhr = new XMLHttpRequest();
-	xhr.open('GET', 'api/events?nocache=' + new Date().getTime(), true); // Append a timestamp to the request URL
+	xhr.open('GET', 'api/events?nocache=' + new Date().getTime(), true);
     xhr.open('GET', 'api/events', true);
     xhr.onreadystatechange = function() {
         if (xhr.readyState === XMLHttpRequest.DONE) {
             if (xhr.status === 200) {
                 let events = JSON.parse(xhr.responseText);
-                console.log('Fetched events:', events); // For debugging
+                console.log('Fetched events:', events); 
 
-                // Ensure that you are filtering correctly
                 let enabledEventsCount = events.filter(event => event.enabled === true || event.enabled === 'true').length;
                 document.getElementById('enabledEventsCount').textContent = enabledEventsCount;
             } else {

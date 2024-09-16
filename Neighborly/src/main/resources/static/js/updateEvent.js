@@ -20,7 +20,7 @@ window.addEventListener('DOMContentLoaded', function() {
                 createDate: updateEventForm.createDate.value,
                 lastUpdate: updateEventForm.lastUpdate.value,
                 imageUrl: updateEventForm.imageUrl.value,
-                enabled: updateEventForm.enabled.value,
+                enabled: updateEventForm.enabled.checked,
                 neighborhoodId: parseInt(updateEventForm.neighborhoodId.value) 
             };
 
@@ -77,10 +77,8 @@ function updateEvent(eventId, updatedEvent) {
             });
         }
         console.log('Event updated successfully');
-		
 		loadEnabledEventsCount();
-		
         window.location.href = 'index.html';
     })
-    .catch(error => console.error('Fetch error:', error));
+    
 }
