@@ -64,4 +64,9 @@ public class EventServiceImpl implements EventService {
 	    return false;
 	}
 
+	@Override
+	public Long countEnabledEvents() {
+	    return eventRepo.countByEnabled(true);
+	}
+
 }

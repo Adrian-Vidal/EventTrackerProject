@@ -11,5 +11,6 @@ public interface EventService {
 	Event create(Event newEvent);
 	Event update(int eventId, Event updatingEvent);
 	boolean delete(int eventId);
+	public Long countEnabledEvents();
 
 }

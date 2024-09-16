@@ -135,6 +135,9 @@ function addEvent(newEvent) {
             if (xhr.status === 200 || xhr.status === 201) {
                 console.log('Event added successfully:', xhr.responseText);
                 displayEvent(JSON.parse(xhr.responseText));
+				
+				loadEnabledEventsCount();
+				
             } else {
                 console.error('Error creating event:', xhr.status, xhr.responseText);
                 displayError("Error creating event: " + xhr.status);
@@ -184,7 +187,10 @@ function deleteEvent(eventId) {
                         if (deleteXhr.readyState === XMLHttpRequest.DONE) {
                             if (deleteXhr.status === 200 || deleteXhr.status === 204) {
                                 console.log('Event deleted successfully');
-                                loadAllEvents(); 
+                                loadAllEvents();
+								
+								loadEnabledEventsCount();
+								 
                             } else {
                                 console.error('Error deleting event:', deleteXhr.status, deleteXhr.responseText);
                                 displayError("Error deleting event: " + deleteXhr.status);
@@ -201,3 +207,41 @@ function deleteEvent(eventId) {
     };
     xhr.send();
 }
+
+
+//================================================================================//
+
+
+function loadEnabledEventsCount() {
+    let xhr = new XMLHttpRequest();
+	xhr.open('GET', 'api/events?nocache=' + new Date().getTime(), true); // Append a timestamp to the request URL
+    xhr.open('GET', 'api/events', true);
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState === XMLHttpRequest.DONE) {
+            if (xhr.status === 200) {
+                let events = JSON.parse(xhr.responseText);
+                console.log('Fetched events:', events); // For debugging
+
+                // Ensure that you are filtering correctly
+                let enabledEventsCount = events.filter(event => event.enabled === true || event.enabled === 'true').length;
+                document.getElementById('enabledEventsCount').textContent = enabledEventsCount;
+            } else {
+                console.error('Error fetching events:', xhr.status, xhr.responseText);
+            }
+        }
+    };
+    xhr.send();
+}
+
+
+
+function displayEnabledEventsCount(totalEnabled) {
+    let countDisplay = document.getElementById('enabledEventsCount');
+    if (countDisplay) {
+        countDisplay.textContent = `Total Enabled Events: ${totalEnabled}`;
+    }
+}
+
+window.addEventListener('DOMContentLoaded', function() {
+    loadEnabledEventsCount();
+});

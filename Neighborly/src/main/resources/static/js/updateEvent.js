@@ -77,6 +77,9 @@ function updateEvent(eventId, updatedEvent) {
             });
         }
         console.log('Event updated successfully');
+		
+		loadEnabledEventsCount();
+		
         window.location.href = 'index.html';
     })
     .catch(error => console.error('Fetch error:', error));

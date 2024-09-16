@@ -57,6 +57,8 @@ public class EventController {
 	    	            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
 	    	        }
 
+	    	        newEvent.setEnabled(true);
+	    	        
 	    	        Event createdEvent = eventService.create(newEvent);
 	    	        return new ResponseEntity<>(createdEvent, HttpStatus.CREATED);
 	    	    } catch (IllegalArgumentException e) {
@@ -85,6 +87,12 @@ public class EventController {
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
+    }
+    
+    
+    @GetMapping("events/totalEnabled")
+    public Long getTotalEnabledEvents() {
+        return eventService.countEnabledEvents();
     }
 }
 

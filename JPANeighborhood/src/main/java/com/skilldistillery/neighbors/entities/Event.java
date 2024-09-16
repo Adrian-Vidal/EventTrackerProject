@@ -38,6 +38,10 @@ public class Event {
 	
 	private boolean enabled;
 	
+	 public boolean isEnabled() {
+	        return enabled;
+	    }
+	
 	public Event() {
 	}
 
