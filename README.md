@@ -33,9 +33,11 @@ EventTrackerProject is a full-stack application designed to manage events and re
 | GET       | `/api/residents/search?firstName=Peyton`      |              | Representation of _resident_ `Peyton` | 200, 204 |
 
 ## Database Schema
-* Picture of ERD diagram
+![4F5D9489-6657-437D-80BA-3F14E13E4B5B](https://github.com/user-attachments/assets/49219604-8e36-4cf9-b709-19fe50f20c3f)
+
 
 ## HTML/Javascript Front End using XHR/AJAX
+In the EventTrackerProject, the HTML/JavaScript front end utilizes XMLHttpRequest (XHR) and Asynchronous JavaScript and XML (AJAX) to interact with the RESTful API. This setup allows for dynamic, real-time communication between the client and server without requiring full page reloads.
 
 
 ## Technologies Used
@@ -54,3 +56,6 @@ EventTrackerProject is a full-stack application designed to manage events and re
 * Integration Testing: Using Postman for testing API endpoints and ensuring that they function correctly before deployment
 * Database Relationships: Managing entity relationships (e.g., one-to-many) using JPA and Hibernate, and ensuring data integrity between related entities
 * API Design: Crafting clear and consistent REST API endpoints and understanding the importance of HTTP status codes in API responses
+* Asynchronous Operations: Gained experience in handling asynchronous operations and ensuring smooth user interactions by leveraging XHR and AJAX techniques.
+* Dynamic Data Handling: Improved skills in dynamically updating web content and managing real-time data interactions, enhancing the overall user experience of the application.
+* Error Handling and Debugging: Developed strategies for managing errors and debugging asynchronous requests, contributing to more reliable and user-friendly interfaces.
