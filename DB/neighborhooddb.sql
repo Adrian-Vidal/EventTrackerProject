@@ -43,7 +43,7 @@ CREATE TABLE IF NOT EXISTS `event` (
   `last_update` DATETIME NULL,
   `image_url` VARCHAR(2000) NULL,
   `enabled` TINYINT NULL,
-  `neighborhood_id` INT NOT NULL,
+  `neighborhood_id` INT NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_event_neighborhood1_idx` (`neighborhood_id` ASC) VISIBLE,
   CONSTRAINT `fk_event_neighborhood1`

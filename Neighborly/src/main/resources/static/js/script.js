@@ -5,7 +5,9 @@ window.addEventListener('load', function() {
     init();
 });
 
+
 //================================================================================//
+
 
 function init() {
     loadAllEvents();
@@ -28,7 +30,9 @@ function loadAllEvents() {
     xhr.send();
 }
 
+
 //================================================================================//
+
 
 function displayEventsList(eventList) {
     let tbody = document.getElementById('eventListBody');
@@ -60,7 +64,9 @@ function displayEventsList(eventList) {
     });
 }
 
+
 //================================================================================//
+
 
 function displayEventDetails(event) {
     let detailsDiv = document.getElementById('eventDetailsDiv');
@@ -76,14 +82,16 @@ function displayEventDetails(event) {
 	        <p><span class="event-description">${event.description || 'No description available.'}</span></p>
 	        ${event.imageUrl ? `<img src="${event.imageUrl}" class="event-image" />` : ''}
 	        <div class="button-group">
-	            <button class="update-btn" onclick="updateEvent(${event.id})">Update</button>
+	            <button class="update-btn" onclick="redirectToUpdateEvent(${event.id})">Update</button>
 	            <button class="delete-btn" onclick="deleteEvent(${event.id})">Delete</button>
 	        </div>`;
 
 	    detailsDiv.innerHTML = detailsHtml;
 	}
 
+	
 //================================================================================//
+
 
 window.addEventListener('DOMContentLoaded', function() {
     let form = document.getElementById('newEventForm');
@@ -150,8 +158,9 @@ function displayError(error) {
 //================================================================================//
 
 
-function updateEvent(eventId) {
-    alert(`Update event with ID: ${eventId}`);
+function redirectToUpdateEvent(eventId) {
+    const updateUrl = `updateEvent.html?id=${eventId}`;
+    window.location.href = updateUrl;
 }
 
 
