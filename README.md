@@ -33,7 +33,7 @@ EventTrackerProject is a full-stack application designed to manage events and re
 | GET       | `/api/residents/search?firstName=Peyton`      |              | Representation of _resident_ `Peyton` | 200, 204 |
 
 ## Database Schema
-![4F5D9489-6657-437D-80BA-3F14E13E4B5B](https://github.com/user-attachments/assets/49219604-8e36-4cf9-b709-19fe50f20c3f)
+https://github.com/user-attachments/assets/49219604-8e36-4cf9-b709-19fe50f20c3f
 
 
 ## HTML/Javascript Front End using XHR/AJAX
