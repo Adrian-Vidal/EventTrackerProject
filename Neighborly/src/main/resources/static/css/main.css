@@ -147,18 +147,30 @@ body {
 }
 
 .button-group button:hover {
-    background-color: #0056b3; /* Darker blue on hover */
+    background-color: #0056b3;
 }
 
 .button-group .delete-btn {
-    background-color: #dc3545; /* Red background for delete action */
+    background-color: #dc3545;
 }
 
 .button-group .delete-btn:hover {
-    background-color: #c82333; /* Darker red on hover */
+    background-color: #c82333;
 }
 
+/* ============================ EVENTS COUNTER ============================ */
 
+#enabledEventsCount {
+    background-color: black;
+    padding: 5px 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-weight: bold;
+}
 
+h2 {
+    color: white;
+    
+}
 
 
