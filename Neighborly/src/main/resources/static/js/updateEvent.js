@@ -39,7 +39,7 @@ window.addEventListener('DOMContentLoaded', function() {
 });
 
 function fetchEventDetails(eventId) {
-    fetch(`/api/events/${eventId}`)
+    fetch(`api/events/${eventId}`)
         .then(response => {
             if (!response.ok) {
                 throw new Error('Network response was not ok');
@@ -63,7 +63,7 @@ function populateForm(event) {
 
 function updateEvent(eventId, updatedEvent) {
 	console.log('Sending Event Update:', updatedEvent);
-    fetch(`/api/events/${eventId}`, {
+    fetch(`api/events/${eventId}`, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json'
