@@ -1,6 +1,40 @@
-<h1>Welcome to Events</h1>
+<h1>Neighborly</h1>
+<h4>A place for you to view upcoming events
+  and chat with your neighbors!</h4>
+  <br>
+  <br>
+<form>
+  <input type="text" name="name" [(ngModel)]="newEvent.name" placeholder="Event Name">
+  <button (click)="addEvent(newEvent)">Add Event</button>
+</form>
 
-<ul>
+
   <!-- TODO build this as a table -->
-   <li *ngFor="let event of events">{{event.name}}</li>
-</ul>
+  <table class="table tables-striped table-hover">
+    <thead class ="table-dark">
+
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+        <th></th>
+        <th>Mark</th>
+        <th>Attending</th>
+        <th>Last Update</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let event of events">
+        <td>{{event.name}}</td>
+        <td>{{event.description}}</td>
+        <img [src]="event.imageUrl" alt="{{ event.name }} image"
+              [width]="575"
+              [height]="350">
+        <td><input type="checkbox"></td>
+        <td>{{event.attendance}}</td>
+        <td>{{event.lastUpdate}}</td>
+      </tr>
+    </tbody>
+   </table>
+
+
+

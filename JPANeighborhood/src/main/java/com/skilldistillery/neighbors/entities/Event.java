@@ -38,6 +38,8 @@ public class Event {
 	
 	private boolean enabled;
 	
+	private Boolean attendance;
+	
 	 public boolean isEnabled() {
 	        return enabled;
 	    }
@@ -127,6 +129,16 @@ public class Event {
 	}
 
 
+	
+
+	public Boolean getAttendance() {
+		return attendance;
+	}
+
+	public void setAttendance(Boolean attendance) {
+		this.attendance = attendance;
+	}
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
@@ -152,7 +164,8 @@ public class Event {
 		builder.append("Event [id=").append(id).append(", name=").append(name).append(", description=")
 				.append(description).append(", createDate=").append(createDate).append(", lastUpdate=")
 				.append(lastUpdate).append(", imageUrl=").append(imageUrl).append(", neighborhood=")
-				.append(neighborhood).append(", enabled=").append(enabled).append("]");
+				.append(neighborhood).append(", enabled=").append(enabled).append(", attendance=").append(attendance)
+				.append("]");
 		return builder.toString();
 	}
 

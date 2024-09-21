@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { NeighborhoodEvent } from '../../models/event';
 
 
+
 @Component({
   selector: 'app-home',
   standalone: true,
@@ -18,6 +19,11 @@ import { NeighborhoodEvent } from '../../models/event';
 export class HomeComponent implements OnInit {
 
   events: NeighborhoodEvent[] = [];
+  selected: NeighborhoodEvent | null = null;
+  editEvent: NeighborhoodEvent | null = null;
+  newEvent: NeighborhoodEvent = new NeighborhoodEvent();
+
+
 
   constructor(
     private eventService: EventService
@@ -39,5 +45,41 @@ export class HomeComponent implements OnInit {
       })
     });
   }
+
+//TODO detail div with selected event
+displayEvent(event: NeighborhoodEvent): void {
+  this.selected = event;
+}
+
+displayTable(): void {
+  this.selected = null;
+}
+// TODO form to create new event
+addEvent(event: NeighborhoodEvent): void{
+  this.eventService.create(event).subscribe({
+    next: (createdEvent) => {
+      this.reloadEvents();
+      this.newEvent = new NeighborhoodEvent();
+    },
+    error: (oops: any) => {
+      console.error('Error creating todo: ');
+      console.error(oops);
+    }
+  })
+}
+
+// }
+//TODO update form
+//TODO delete button - where? in list or detail view
+//TODO Models for Neighborhood, EventVisit, User
+
+
+
+
+
+
+
+
+
 
 }

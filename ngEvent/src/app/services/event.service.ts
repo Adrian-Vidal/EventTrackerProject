@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, catchError, throwError } from 'rxjs';
 import { NeighborhoodEvent } from '../models/event';
 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -25,5 +26,23 @@ export class EventService {
       })
     );
   }
+
+  //TODO: retrieve, create, update, destroy
+// =========================================================================== //
+create(event: NeighborhoodEvent): Observable<NeighborhoodEvent>{
+    event.attendance = false;
+    event.description =  '';
+    return this.http.post<NeighborhoodEvent>(this.url, event).pipe(
+      catchError((err: any) => {
+        console.log(err);
+        return throwError(
+           () => new Error( 'TodoService.create(): error adding todo: ' + err )
+        );
+      })
+    );
+  }
+
+
+
 
 }
