@@ -30,19 +30,35 @@ export class EventService {
   //TODO: retrieve, create, update, destroy
 // =========================================================================== //
 create(event: NeighborhoodEvent): Observable<NeighborhoodEvent>{
-    event.attendance = false;
-    event.description =  '';
+    // event.id = 0;
+    // event.description = '';
+    // event.createDate = '';
+    // event.lastUpdate = '';
+    // event.imageUrl = '';
+    // event.enabled = true;
+    // event.neighborhoodId = 1;
+    // event.attendance = false;
+
     return this.http.post<NeighborhoodEvent>(this.url, event).pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError(
-           () => new Error( 'TodoService.create(): error adding todo: ' + err )
+           () => new Error( 'EventService.create(): error adding event: ' + err )
         );
       })
     );
   }
 
-
+  destroy(eventId: number): Observable<void>{
+    return this.http.delete<void>(`${this.url}/${eventId}`).pipe(
+      catchError((err: any) =>{
+        console.log(err);
+        return throwError(
+          () => new Error(`EventService.destroy(): error deleting event: ` + err)
+        );
+      })
+    );
+  }
 
 
 }

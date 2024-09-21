@@ -7,6 +7,7 @@ export class NeighborhoodEvent {
   imageUrl: string;
   enabled: boolean;
   attendance: boolean;
+  neighborhoodId: number;
   //user: User; (stretch goal)
 
 constructor(
@@ -18,6 +19,7 @@ constructor(
   imageUrl: string = '',
   enabled: boolean = true,
   attendance: boolean = false,
+  neighborhoodId: number = 1,
 ) {
   this.id = id;
   this.name = name;
@@ -27,5 +29,6 @@ constructor(
   this.imageUrl = imageUrl;
   this.enabled = enabled;
   this.attendance = attendance;
+  this.neighborhoodId = neighborhoodId;
   }
 }

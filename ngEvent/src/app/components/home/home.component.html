@@ -3,10 +3,10 @@
   and chat with your neighbors!</h4>
   <br>
   <br>
-<form>
-  <input type="text" name="name" [(ngModel)]="newEvent.name" placeholder="Event Name">
-  <button (click)="addEvent(newEvent)">Add Event</button>
-</form>
+  <form>
+    <input type="text" name="name" [(ngModel)]="newEvent.name" placeholder="Event Name">
+    <button (click)="addEvent()">Add Event</button>
+  </form>
 
 
   <!-- TODO build this as a table -->
@@ -20,6 +20,7 @@
         <th>Mark</th>
         <th>Attending</th>
         <th>Last Update</th>
+        <th>Delete</th>
       </tr>
     </thead>
     <tbody>
@@ -32,6 +33,7 @@
         <td><input type="checkbox"></td>
         <td>{{event.attendance}}</td>
         <td>{{event.lastUpdate}}</td>
+        <td><button (click)="deleteEvent(event.id)">Delete</button></td>
       </tr>
     </tbody>
    </table>
