@@ -1,9 +1,7 @@
 <h1>Neighborly</h1>
 <h4>A place for you to view upcoming events
   and chat with your neighbors!</h4>
-  <br>
-  <br>
-
+<h4>Total Events Available: {{ countEvents() }}</h4>
   <div *ngIf="!selected">
   <form>
     <input type="text" name="name" [(ngModel)]="newEvent.name" placeholder="Event Name">
@@ -32,14 +30,14 @@
         <img [src]="event.imageUrl" alt="{{ event.name }} image"
               [width]="575"
               [height]="350">
-        <td><input type="checkbox"></td>
+        <td><input type="checkbox" [(ngModel)]="event.attendance" (ngModelChange)="toggleAttendance(event, $event)"></td>
         <td>{{event.attendance}}</td>
         <td>{{event.lastUpdate}}</td>
         <td><button (click)="deleteEvent(event.id)">Delete</button></td>
       </tr>
     </tbody>
    </table>
-  </div>
+</div>
 
 
   <!-- ====================================================================== -->

@@ -6,7 +6,7 @@ export class NeighborhoodEvent {
   lastUpdate: string;
   imageUrl: string;
   enabled: boolean;
-  attendance: boolean;
+  attendance: boolean = false;
   neighborhood: { id: number };
 
 constructor(

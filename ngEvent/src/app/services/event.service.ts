@@ -4,7 +4,6 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, catchError, throwError } from 'rxjs';
 import { NeighborhoodEvent } from '../models/event';
 
-
 @Injectable({
   providedIn: 'root'
 })

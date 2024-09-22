@@ -27,6 +27,7 @@ export class HomeComponent implements OnInit {
 
   editNeighborhoodEvent: any;
 
+
 // =============================================================================//
 
   constructor(
@@ -120,6 +121,27 @@ deleteEvent(eventId: number): void {
     }
   })
 }
+
+// =============================================================================//
+
+toggleAttendance(event: NeighborhoodEvent, newValue: boolean): void {
+  event.attendance = newValue;  // Use the updated checkbox value
+  this.eventService.update(event).subscribe({
+    next: () => {
+      console.log('Attendance updated successfully.');
+    },
+    error: (err: any) => {
+      console.error('Error updating attendance: ', err);
+    }
+  });
+}
+
+// =============================================================================//
+
+countEvents(): number {
+  return this.events.length;
+}
+// =============================================================================//
 
 //TODO Models for Neighborhood, EventVisit, User
 
