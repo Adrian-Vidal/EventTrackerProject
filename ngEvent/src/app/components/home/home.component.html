@@ -3,12 +3,14 @@
   and chat with your neighbors!</h4>
   <br>
   <br>
+
+  <div *ngIf="!selected">
   <form>
     <input type="text" name="name" [(ngModel)]="newEvent.name" placeholder="Event Name">
-    <button (click)="addEvent()">Add Event</button>
+    <button type="button" (click)="addEvent(newEvent)">Add Event</button>
   </form>
-
-
+  <br>
+  <br>
   <!-- TODO build this as a table -->
   <table class="table tables-striped table-hover">
     <thead class ="table-dark">
@@ -25,7 +27,7 @@
     </thead>
     <tbody>
       <tr *ngFor="let event of events">
-        <td>{{event.name}}</td>
+        <td (click)="displayEvent(event)">{{event.name}}</td>
         <td>{{event.description}}</td>
         <img [src]="event.imageUrl" alt="{{ event.name }} image"
               [width]="575"
@@ -37,6 +39,43 @@
       </tr>
     </tbody>
    </table>
+  </div>
 
 
+  <!-- ====================================================================== -->
 
+<!-- div with an update form -->
+  <div *ngIf="editEvent">
+    <div *ngIf="selected && ! editEvent"></div>
+
+    <form (ngSubmit)="updateEvent()">
+      <label>Task:
+        <input type="text" name="name" [(ngModel)]="editEvent.name">
+      </label><br>
+      <label>Description:
+        <input type="text" name="description" [(ngModel)]="editEvent.description">
+      </label><br>
+      <label>Image Url:
+        <input type="text" name="imageUrl" [(ngModel)]="editEvent.imageUrl">
+      </label><br>
+      <label>Attending:
+        <input type="checkbox" name="attendance" [(ngModel)]="editEvent.attendance">
+      </label><br>
+      <label>Enabled:
+        <input type="checkbox" name="enabled" [(ngModel)]="editEvent.enabled">
+      </label><br>
+      <button type="submit">Save</button>
+      <button (click)="cancelEdit()" type="button">Cancel</button>
+    </form>
+  </div>
+
+  <!-- Detail div with *ngIf -->
+<div *ngIf="selected">
+  <h3>{{ selected.id }}</h3>
+  <h3>{{ selected.name }}</h3>
+  <h4>Description: {{ selected.description }}</h4>
+  <p>Attending: {{ selected.attendance}}</p>
+  <p>Enabled: {{ selected.enabled }}</p>
+  <button (click)="displayTable()">Back to List</button>
+  <button (click)="setEditEvent()">Edit</button>
+</div>

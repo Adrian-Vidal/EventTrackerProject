@@ -13,7 +13,7 @@ export class EventService {
   url = environment.baseUrl + "api/events";
 
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
   ) { }
 
   index(): Observable<NeighborhoodEvent[]> {
@@ -30,20 +30,22 @@ export class EventService {
   //TODO: retrieve, create, update, destroy
 // =========================================================================== //
 create(event: NeighborhoodEvent): Observable<NeighborhoodEvent>{
-    // event.id = 0;
-    // event.description = '';
-    // event.createDate = '';
-    // event.lastUpdate = '';
-    // event.imageUrl = '';
-    // event.enabled = true;
-    // event.neighborhoodId = 1;
-    // event.attendance = false;
-
     return this.http.post<NeighborhoodEvent>(this.url, event).pipe(
       catchError((err: any) => {
         console.log(err);
         return throwError(
            () => new Error( 'EventService.create(): error adding event: ' + err )
+        );
+      })
+    );
+  }
+
+  update(event: NeighborhoodEvent): Observable<NeighborhoodEvent> {
+    return this.http.put<NeighborhoodEvent>(`${this.url}/${event.id}`, event).pipe(
+      catchError((err: any) => {
+        console.log(err);
+        return throwError(
+          () => new Error(`TodoService.update(): error updating todo: ` + err)
         );
       })
     );

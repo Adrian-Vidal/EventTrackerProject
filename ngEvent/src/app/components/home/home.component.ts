@@ -23,7 +23,9 @@ export class HomeComponent implements OnInit {
   events: NeighborhoodEvent[] = [];
   selected: NeighborhoodEvent | null = null;
   editEvent: NeighborhoodEvent | null = null;
-  newEvent: NeighborhoodEvent = new NeighborhoodEvent();
+  newEvent: NeighborhoodEvent = new NeighborhoodEvent(0, '', '', '', '', '', true, false, {id: 1});
+
+  editNeighborhoodEvent: any;
 
 // =============================================================================//
 
@@ -64,26 +66,48 @@ displayTable(): void {
 // =============================================================================//
 
 // TODO form to create new event
-addEvent(): void{
-  this.newEvent.id = 0;
-  this.newEvent.name = '';
-
-  console.log('Submitting event:', this.newEvent)
-
+addEvent(event: NeighborhoodEvent): void {
   this.eventService.create(this.newEvent).subscribe({
     next: (createdEvent) => {
       this.reloadEvents();
       this.newEvent = new NeighborhoodEvent();
     },
     error: (oops: any) => {
-      console.error('Error creating event: ');
-      console.error(oops);
+      console.error('Error creating event: ', oops);
     }
-  })
+  });
 }
 
-// }
+// =============================================================================//
+
 //TODO update form
+updateEvent(): void {
+  if (this.editEvent) {
+    this.eventService.update(this.editEvent).subscribe({
+      next: () => {
+        this.reloadEvents();
+        this.editEvent = null;
+        this.selected = null;
+      },
+      error: (err: any) => {
+        console.error('Error updating todo:', err);
+      }
+    });
+  }
+}
+
+setEditEvent(): void {
+  if (this.selected) {
+    this.editEvent = Object.assign({}, this.selected);
+  }
+}
+
+cancelEdit(): void {
+  this.editEvent = null;
+}
+
+// =============================================================================//
+
 //TODO delete button - where? in list or detail view
 deleteEvent(eventId: number): void {
   this.eventService.destroy(eventId).subscribe({
@@ -96,6 +120,7 @@ deleteEvent(eventId: number): void {
     }
   })
 }
+
 //TODO Models for Neighborhood, EventVisit, User
 
 
