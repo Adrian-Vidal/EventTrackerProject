@@ -110,6 +110,13 @@ cancelEdit(): void {
 // =============================================================================//
 
 //TODO delete button - where? in list or detail view
+confirmDelete(eventId: number): void {
+  const confirmDelete = confirm("Are you sure you want to delete this event?");
+  if (confirmDelete) {
+    this.deleteEvent(eventId);
+  }
+}
+
 deleteEvent(eventId: number): void {
   this.eventService.destroy(eventId).subscribe({
     next: () => {
@@ -119,8 +126,9 @@ deleteEvent(eventId: number): void {
       console.error('TodoListComponent.deleteTodo failed');
       console.error(kaboom);
     }
-  })
+  });
 }
+
 
 // =============================================================================//
 

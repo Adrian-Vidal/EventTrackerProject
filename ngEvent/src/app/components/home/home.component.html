@@ -1,16 +1,17 @@
-<h1>Neighborly</h1>
-<h4>A place for you to view upcoming events
+<h1 class="title">Neighborly</h1>
+<h4 class="sub-title">A place for you to view upcoming events
   and chat with your neighbors!</h4>
-<h4>Total Events Available: {{ countEvents() }}</h4>
+  <div class="counter-container">
+<h4 class="event-counter">Total Events Available: {{ countEvents() }}</h4>
+  </div>
   <div *ngIf="!selected">
   <form>
     <input type="text" name="name" [(ngModel)]="newEvent.name" placeholder="Event Name">
     <button type="button" (click)="addEvent(newEvent)">Add Event</button>
   </form>
-  <br>
-  <br>
+
   <!-- TODO build this as a table -->
-  <table class="table tables-striped table-hover">
+  <table class="table tables-striped">
     <thead class ="table-dark">
 
       <tr>
@@ -23,9 +24,9 @@
         <th>Delete</th>
       </tr>
     </thead>
-    <tbody>
+    <tbody class="tbody">
       <tr *ngFor="let event of events">
-        <td (click)="displayEvent(event)">{{event.name}}</td>
+        <td class="event-name" (click)="displayEvent(event)">{{event.name}}</td>
         <td>{{event.description}}</td>
         <img [src]="event.imageUrl" alt="{{ event.name }} image"
               [width]="575"
@@ -33,7 +34,7 @@
         <td><input type="checkbox" [(ngModel)]="event.attendance" (ngModelChange)="toggleAttendance(event, $event)"></td>
         <td>{{event.attendance}}</td>
         <td>{{event.lastUpdate}}</td>
-        <td><button (click)="deleteEvent(event.id)">Delete</button></td>
+        <td><button class="delete-button" (click)="confirmDelete(event.id)">Delete</button></td>
       </tr>
     </tbody>
    </table>
@@ -42,34 +43,33 @@
 
   <!-- ====================================================================== -->
 
-<!-- div with an update form -->
-  <div *ngIf="editEvent">
-    <div *ngIf="selected && ! editEvent"></div>
+<!-- Update Form -->
+<div *ngIf="editEvent" class="update-form">
+  <form (ngSubmit)="updateEvent()">
+    <h1>Update Event</h1>
+    <label>Task:</label>
+    <input type="text" name="name" [(ngModel)]="editEvent.name"><br>
+    <br>
+    <label>Description:</label>
+    <input type="text" name="description" [(ngModel)]="editEvent.description"><br>
+    <br>
+    <label>Image Url:</label>
+    <input type="text" name="imageUrl" [(ngModel)]="editEvent.imageUrl"><br>
+    <br>
+    <label>Attending:</label>
+    <input type="checkbox" name="attendance" [(ngModel)]="editEvent.attendance"><br>
+    <br>
+    <label>Enabled:</label>
+    <input type="checkbox" name="enabled" [(ngModel)]="editEvent.enabled"><br>
+    <br>
+    <button type="submit" class="btn btn-primary">Save</button>
+    <button (click)="cancelEdit()" type="button" class="btn btn-secondary">Cancel</button>
+  </form>
+</div>
 
-    <form (ngSubmit)="updateEvent()">
-      <label>Task:
-        <input type="text" name="name" [(ngModel)]="editEvent.name">
-      </label><br>
-      <label>Description:
-        <input type="text" name="description" [(ngModel)]="editEvent.description">
-      </label><br>
-      <label>Image Url:
-        <input type="text" name="imageUrl" [(ngModel)]="editEvent.imageUrl">
-      </label><br>
-      <label>Attending:
-        <input type="checkbox" name="attendance" [(ngModel)]="editEvent.attendance">
-      </label><br>
-      <label>Enabled:
-        <input type="checkbox" name="enabled" [(ngModel)]="editEvent.enabled">
-      </label><br>
-      <button type="submit">Save</button>
-      <button (click)="cancelEdit()" type="button">Cancel</button>
-    </form>
-  </div>
 
   <!-- Detail div with *ngIf -->
-<div *ngIf="selected">
-  <h3>{{ selected.id }}</h3>
+<div *ngIf="selected" class="detail-div">
   <h3>{{ selected.name }}</h3>
   <h4>Description: {{ selected.description }}</h4>
   <p>Attending: {{ selected.attendance}}</p>
@@ -77,3 +77,4 @@
   <button (click)="displayTable()">Back to List</button>
   <button (click)="setEditEvent()">Edit</button>
 </div>
+
