@@ -46,7 +46,7 @@
 }
 
 .delete-button:hover {
-  background-color: #c0392b;
+  background-color: #6d2018;
 }
 
 .update-form {
@@ -63,4 +63,19 @@
   border-radius: 8px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
   text-align: center;
+}
+
+.add-button {
+  background-color: #228f4a;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 3px 7px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s;
+}
+
+.add-button:hover {
+  background-color: #104423;
 }
