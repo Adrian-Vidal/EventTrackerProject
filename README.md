@@ -1,7 +1,7 @@
 # EventTrackerProject
 
 ## Overview
-EventTrackerProject is a full-stack application designed to manage events and related entities. It utilizes a MySQL database, Spring Boot for the backend, and Spring Data JPA for ORM. The application allows users to perform CRUD operations on events, neighborhoods, and residents.
+EventTrackerProject is a full-stack application that manages events, neighborhoods, and residents. It combines a MySQL database, Spring Boot for the backend, and Angular for the front-end user interface. Users can perform CRUD operations on the entities and interact with a dynamically updated interface that reflects real-time changes.
 
 ## REST Endpoints
 ### Events
@@ -49,6 +49,7 @@ In the EventTrackerProject, the HTML/JavaScript front end utilizes XMLHttpReques
 * Spring Data JPA
 * MySQL Workbench
 * Postman
+* Angular
 
 ## Lessons Learned
 * CRUD Operations: Implementing CRUD operations with Spring Data JPA and MySQL provided practical experience with RESTful API design and data persistence
